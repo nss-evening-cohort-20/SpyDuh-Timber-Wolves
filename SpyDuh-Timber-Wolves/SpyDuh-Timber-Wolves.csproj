@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>SpyDuh_Timber_Wolves</RootNamespace>
+    <UserSecretsId>0eb69c8e-527b-438b-92bb-fb8f49dd22e4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Folder\" />
   </ItemGroup>
 
 </Project>
