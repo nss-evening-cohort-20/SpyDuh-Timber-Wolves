@@ -5,7 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>SpyDuh_Timber_Wolves</RootNamespace>
+
     <UserSecretsId>f1412fe4-7830-4fb8-864b-e863f8d01a10</UserSecretsId>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,9 +16,11 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+
     <Folder Include="SQL\" />
     <Folder Include="Models\" />
     <Folder Include="Repositories\" />
+
   </ItemGroup>
 
   <ItemGroup>
