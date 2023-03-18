@@ -24,6 +24,8 @@ GO
 CREATE TABLE [spySkills] (
   [id] int PRIMARY KEY,
   [skillId] int,
+  [skillName] nvarchar(255),
+  [skillLevel] int,
   [spyId] int
 )
 GO
@@ -31,21 +33,9 @@ GO
 CREATE TABLE [spyServices] (
   [id] int PRIMARY KEY,
   [serviceId] int,
-  [spyId] int
-)
-GO
-
-CREATE TABLE [skill] (
-  [id] int PRIMARY KEY,
-  [skillName] nvarchar(255),
-  [skillLevel] int
-)
-GO
-
-CREATE TABLE [service] (
-  [id] int PRIMARY KEY,
   [serviceName] nvarchar(255),
-  [price] int
+  [price] int,
+  [spyId] int
 )
 GO
 
@@ -79,12 +69,6 @@ ALTER TABLE [spyServices] ADD FOREIGN KEY ([spyId]) REFERENCES [spy] ([id])
 GO
 
 ALTER TABLE [spySkills] ADD FOREIGN KEY ([spyId]) REFERENCES [spy] ([id])
-GO
-
-ALTER TABLE [spySkills] ADD FOREIGN KEY ([skillId]) REFERENCES [skill] ([id])
-GO
-
-ALTER TABLE [spyServices] ADD FOREIGN KEY ([serviceId]) REFERENCES [service] ([id])
 GO
 
 ALTER TABLE [spy] ADD FOREIGN KEY ([skills]) REFERENCES [spySkills] ([id])
