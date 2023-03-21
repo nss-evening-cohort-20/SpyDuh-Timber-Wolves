@@ -17,19 +17,17 @@ namespace SpyDuh_Timber_Wolves.Repositories
                 connection.Open();
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT spy.id as SpyId, spy.[name], spy.bio, spyServices.id as Id, spyServices.serviceName, spyServices.price" +
-                        "FROM spy" +
-                        "JOIN spyServices on spy.id = spyServices.spyId";
+                    command.CommandText = "SELECT id, serviceName as ServiceName, price as Price, spyId as SpyId  FROM spyServices";
                     var reader = command.ExecuteReader();
                     var services = new List<SpyServices>();
                     while (reader.Read())
                     {
                         var service = new SpyServices()
                         {
-                            id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            serviceName = reader.GetString(reader.GetOrdinal("serviceName")),
-                            price = reader.GetInt32(reader.GetOrdinal("price")),
-                            spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                            id = reader.GetInt32(reader.GetOrdinal("id")),
+                            serviceName = reader.GetString(reader.GetOrdinal("ServiceName")),
+                            price = reader.GetInt32(reader.GetOrdinal("Price")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("spyId")),
                         };
 
                         services.Add(service);
