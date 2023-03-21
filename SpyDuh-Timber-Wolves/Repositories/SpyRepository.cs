@@ -30,7 +30,6 @@ namespace SpyDuh_Timber_Wolves.Repositories
                             bio = reader.GetString(reader.GetOrdinal("Bio")),
                             spySkills = new List <SpySkills>(),                           
                             spyServices = new List <SpyServices>(),
-                            
                         };
                         spy.spySkills.Add(new SpySkills()
                         {
