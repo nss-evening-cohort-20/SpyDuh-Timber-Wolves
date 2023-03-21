@@ -30,7 +30,6 @@ namespace SpyDuh_Timber_Wolves.Repositories
                             bio = reader.GetString(reader.GetOrdinal("Bio")),
                             spySkills = new List <SpySkills>(),                           
                             spyServices = new List <SpyServices>(),
-                            
                         };
                         spy.spySkills.Add(new SpySkills()
                         {
@@ -38,6 +37,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
                             id = reader.GetInt32(reader.GetOrdinal("skillId")),
                             skillName = reader.GetString(reader.GetOrdinal("skillName")),
                             skillLevel = reader.GetInt32(reader.GetOrdinal("skillLevel")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("Id"))
                         });
                         spy.spyServices.Add(new SpyServices()
                         {
@@ -45,6 +45,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
                             id = reader.GetInt32(reader.GetOrdinal("skillId")),
                             serviceName = reader.GetString(reader.GetOrdinal("serviceName")),
                             price = reader.GetInt32(reader.GetOrdinal("price")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("Id"))
                         });
 
                         spies.Add(spy);
@@ -87,6 +88,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
                             id = reader.GetInt32(reader.GetOrdinal("skillId")),
                             skillName = reader.GetString(reader.GetOrdinal("skillName")),
                             skillLevel = reader.GetInt32(reader.GetOrdinal("skillLevel")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("Id"))
                         });
                         spy.spyServices.Add(new SpyServices()
                         {
@@ -94,6 +96,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
                             id = reader.GetInt32(reader.GetOrdinal("skillId")),
                             serviceName = reader.GetString(reader.GetOrdinal("serviceName")),
                             price = reader.GetInt32(reader.GetOrdinal("price")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("Id"))
                         });
                     }
                     reader.Close();

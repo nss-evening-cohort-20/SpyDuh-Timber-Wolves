@@ -10,6 +10,6 @@ namespace SpyDuh_Timber_Wolves.Repositories
     {
         private readonly string _connectionString;
 
-        public
+        
     }
 }
