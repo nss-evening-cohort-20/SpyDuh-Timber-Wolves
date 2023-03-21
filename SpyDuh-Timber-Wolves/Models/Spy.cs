@@ -7,14 +7,11 @@ namespace SpyDuh_Timber_Wolves.Models
 
 		public string name { get; set; }
 
-		
+		public string bio { get; set; }
 		public List<SpySkills> spySkills { get; set; }
 
 		public List<SpyServices> spyServices {get; set;}
-
-		public string bio { get; set; }
-
-		
+	
 	}
 }
 
