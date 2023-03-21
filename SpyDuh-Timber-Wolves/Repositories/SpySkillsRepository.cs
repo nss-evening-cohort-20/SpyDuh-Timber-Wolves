@@ -81,10 +81,50 @@ namespace SpyDuh_Timber_Wolves.Repositories
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = @"
-                    "
+                            INSERT INTO SpySkills (skillName, skillLevel)
+                            OUTPUT INSERTED.ID
+                            VALUES (@skillName, @skillLevel)";
+                    command.Parameters.AddWithValue("skillName", skills.skillName);
+                    command.Parameters.AddWithValue("skillLevel", skills.skillLevel);
+
+                    skills.id = (int)command.ExecuteScalar();
                 }
             }
         }
 
+        public void Update(SpySkills skills)
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"
+                            UPDATE spySkills
+                            SET skillName = @skillName, skillLevel = @skillLevel
+                            WHERE id = @id";
+                    command.Parameters.AddWithValue("@id", skills.id);
+                    command.Parameters.AddWithValue("@skillName", skills.skillName);
+                    command.Parameters.AddWithValue("@skillLevel", skills.skillLevel);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "DELETE FROM spySkills Where Id = @id";
+                    command.Parameters.AddWithValue("@id", id);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
