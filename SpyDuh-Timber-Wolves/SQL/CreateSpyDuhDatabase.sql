@@ -13,17 +13,14 @@ DROP TABLE IF EXISTS [Skills];
 DROP TABLE IF EXISTS [Friend];
 
 CREATE TABLE [spy] (
-  [id] int PRIMARY KEY,
+  [id] int IDENTIFY PRIMARY KEY,
   [name] nvarchar(255),
-  [skills] int,
-  [services] int,
   [bio] nvarchar(255)
 )
 GO
 
 CREATE TABLE [spySkills] (
-  [id] int PRIMARY KEY,
-  [skillId] int,
+  [id] int IDENTIFY PRIMARY KEY,
   [skillName] nvarchar(255),
   [skillLevel] int,
   [spyId] int
@@ -31,8 +28,7 @@ CREATE TABLE [spySkills] (
 GO
 
 CREATE TABLE [spyServices] (
-  [id] int PRIMARY KEY,
-  [serviceId] int,
+  [id] int IDENTIFY PRIMARY KEY,
   [serviceName] nvarchar(255),
   [price] int,
   [spyId] int
@@ -40,14 +36,14 @@ CREATE TABLE [spyServices] (
 GO
 
 CREATE TABLE [friend] (
-  [Id] int PRIMARY KEY,
+  [Id] int IDENTIFY PRIMARY KEY,
   [spyId] int,
   [friendId] int
 )
 GO
 
 CREATE TABLE [enemy] (
-  [Id] int PRIMARY KEY,
+  [Id] int IDENTIFY PRIMARY KEY,
   [spyId] int,
   [enemyId] int
 )
@@ -69,10 +65,4 @@ ALTER TABLE [spyServices] ADD FOREIGN KEY ([spyId]) REFERENCES [spy] ([id])
 GO
 
 ALTER TABLE [spySkills] ADD FOREIGN KEY ([spyId]) REFERENCES [spy] ([id])
-GO
-
-ALTER TABLE [spy] ADD FOREIGN KEY ([skills]) REFERENCES [spySkills] ([id])
-GO
-
-ALTER TABLE [spy] ADD FOREIGN KEY ([services]) REFERENCES [spyServices] ([id])
 GO
