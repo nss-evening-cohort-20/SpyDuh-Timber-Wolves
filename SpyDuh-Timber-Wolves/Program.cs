@@ -1,3 +1,5 @@
+using SpyDuh_Timber_Wolves.Repositories;
+
 namespace SpyDuh_Timber_Wolves
 {
     public class Program
@@ -7,7 +9,7 @@ namespace SpyDuh_Timber_Wolves
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddTransient<ISpyRepository, SpyRepository>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
