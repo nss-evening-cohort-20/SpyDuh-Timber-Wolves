@@ -22,16 +22,28 @@ namespace SpyDuh_Timber_Wolves.Controllers
             return Ok(_spySkillsRepository.GetAll());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("spy/{spyId}")]
+        public IActionResult GetSpiesSkills(int spyId)
         {
-            var spy = _spySkillsRepository.GetById(id);
+            var spy = _spySkillsRepository.GetBySpyId(spyId);
             if (spy == null)
             {
                 return NotFound();
             }
             return Ok(spy);
         }
+
+        [HttpGet("{skillId}")]
+        public IActionResult GetSkill(int skillId)
+        {
+            var skill = _spySkillsRepository.GetBySkillId(skillId);
+            if (skill == null)
+            {
+                return NotFound();
+            }
+            return Ok(skill);
+        }
+
 
         [HttpPost]
         public IActionResult Post(SpySkills spySkills)

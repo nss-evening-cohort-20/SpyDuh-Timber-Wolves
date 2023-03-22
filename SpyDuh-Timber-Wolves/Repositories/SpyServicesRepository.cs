@@ -40,33 +40,61 @@ namespace SpyDuh_Timber_Wolves.Repositories
             }
         }
 
-        public SpyServices GetById(int id)
+        public List<SpyServices> GetBySpyId(int id)
         {
             using (var connection = Connection)
             {
                 connection.Open();
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT spy.id as SpyId, spy.[name], spy.bio, spyServices.id as Id, spyServices.serviceName, spyServices.price" +
-                        "FROM spy" +
-                        "JOIN spyServices on spy.id = spyServices.spyId WHERE spy.id = @id";
-                    command.Parameters.AddWithValue("@id", id);
+                    command.CommandText = @"SELECT spy.id as SpyId, spy.[name], spy.bio, spyServices.id as Id, spyServices.serviceName, spyServices.price FROM spy JOIN spyServices on spy.id = spyServices.spyId WHERE spy.id = @spyId";
+                    command.Parameters.AddWithValue("@spyId", id);
+                    var services = new List<SpyServices>();
                     var reader = command.ExecuteReader();
 
-                    SpyServices services = null;
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        services = new SpyServices()
+                        var service = new SpyServices()
                         {
                             id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            serviceName = reader.GetString(reader.GetOrdinal("skillName")),
-                            price = reader.GetInt32(reader.GetOrdinal("skillLevel")),
-                            spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                            serviceName = reader.GetString(reader.GetOrdinal("serviceName")),
+                            price = reader.GetInt32(reader.GetOrdinal("price")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("spyId")),
                         };
+                        services.Add(service);
                     }
                     reader.Close();
 
                     return services;
+                }
+            }
+        }
+
+        public SpyServices GetByServiceId(int id)
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"SELECT spy.id as SpyId, spy.[name], spy.bio, spyServices.id as Id, spyServices.serviceName, spyServices.price FROM spy JOIN spyServices on spy.id = spyServices.spyId WHERE spyServices.id = @serviceId";
+                    command.Parameters.AddWithValue("@serviceId", id);
+                    var reader = command.ExecuteReader();
+
+                    SpyServices service = null;
+                    if (reader.Read())
+                    {
+                        service = new SpyServices()
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            serviceName = reader.GetString(reader.GetOrdinal("serviceName")),
+                            price = reader.GetInt32(reader.GetOrdinal("price")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("spyId")),
+                        };
+                    }
+                    reader.Close();
+
+                    return service;
                 }
             }
         }

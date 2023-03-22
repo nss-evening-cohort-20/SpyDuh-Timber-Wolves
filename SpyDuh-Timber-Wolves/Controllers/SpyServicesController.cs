@@ -23,10 +23,21 @@ namespace SpyDuh_Timber_Wolves.Controllers
             return Ok(_spyServicesRepository.GetAll());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("spy/{spyId}")]
+        public IActionResult GetSpiesServices(int spyId)
         {
-            var service = _spyServicesRepository.GetById(id);
+            var spy = _spyServicesRepository.GetBySpyId(spyId);
+            if (spy == null)
+            {
+                return NotFound();
+            }
+            return Ok(spy);
+        }
+
+        [HttpGet("{serviceId}")]
+        public IActionResult GetService(int serviceId)
+        {
+            var service = _spyServicesRepository.GetByServiceId(serviceId);
             if (service == null)
             {
                 return NotFound();
