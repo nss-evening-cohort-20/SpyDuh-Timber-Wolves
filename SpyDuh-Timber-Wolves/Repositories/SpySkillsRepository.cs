@@ -40,23 +40,51 @@ namespace SpyDuh_Timber_Wolves.Repositories
             }
         }
 
-        public SpySkills GetById(int id)
+        public List<SpySkills> GetBySpyId(int id)
         {
             using (var connection = Connection)
             {
                 connection.Open();
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT spy.id as SpyId, spy.[name], spy.bio, spySkills.id as Id, spySkills.skillName, spySkills.skillLevel" +
-                        "FROM spy" +
-                        "JOIN spySkills on spy.id = spySkills.spyId WHERE spy.id = @id";
-                    command.Parameters.AddWithValue("@id", id);
+                    command.CommandText = "SELECT spy.id as SpyId, spy.[name], spy.bio, spySkills.id as Id, spySkills.skillName, spySkills.skillLevel FROM spy JOIN spySkills on spy.id = spySkills.spyId WHERE spy.id = @spyId";
+                    command.Parameters.AddWithValue("@spyId", id);
+                    var skills = new List<SpySkills>();
                     var reader = command.ExecuteReader();
 
-                    SpySkills skills = null;
+                    while (reader.Read())
+                    {
+                        var skill = new SpySkills()
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            skillName = reader.GetString(reader.GetOrdinal("skillName")),
+                            skillLevel = reader.GetInt32(reader.GetOrdinal("skillLevel")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                        };
+                        skills.Add(skill);
+                    }
+                    reader.Close();
+
+                    return skills;
+                }
+            }
+        }
+
+        public SpySkills GetBySkillId(int id)
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT spy.id as SpyId, spy.[name], spy.bio, spySkills.id as Id, spySkills.skillName, spySkills.skillLevel FROM spy JOIN spySkills on spy.id = spySkills.spyId WHERE spySkill.id = @skillId";
+                    command.Parameters.AddWithValue("@skillId", id);
+                    var reader = command.ExecuteReader();
+
+                    SpySkills skill = null;
                     if (reader.Read())
                     {
-                        skills = new SpySkills()
+                        skill = new SpySkills()
                         {
                             id = reader.GetInt32(reader.GetOrdinal("Id")),
                             skillName = reader.GetString(reader.GetOrdinal("skillName")),
@@ -66,7 +94,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
                     }
                     reader.Close();
 
-                    return skills;
+                    return skill;
                 }
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpyDuh_Timber_Wolves.Models;
+using System;
 namespace SpyDuh_Timber_Wolves.Models
 {
     public class Friend
@@ -14,4 +15,3 @@ namespace SpyDuh_Timber_Wolves.Models
         public Spy friend { get; set; }
     }
 }
-
