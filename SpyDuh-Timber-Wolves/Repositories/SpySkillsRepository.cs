@@ -77,7 +77,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
                 connection.Open();
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT spy.id as SpyId, spy.[name], spy.bio, spySkills.id as Id, spySkills.skillName, spySkills.skillLevel FROM spy JOIN spySkills on spy.id = spySkills.spyId WHERE spySkill.id = @skillId";
+                    command.CommandText = "SELECT spy.id as SpyId, spy.[name], spy.bio, spySkills.id as Id, spySkills.skillName, spySkills.skillLevel FROM spy JOIN spySkills on spy.id = spySkills.spyId WHERE spySkills.id = @skillId";
                     command.Parameters.AddWithValue("@skillId", id);
                     var reader = command.ExecuteReader();
 
@@ -107,11 +107,12 @@ namespace SpyDuh_Timber_Wolves.Repositories
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = @"
-                            INSERT INTO SpySkills (skillName, skillLevel)
+                            INSERT INTO SpySkills (skillName, skillLevel, spyId)
                             OUTPUT INSERTED.ID
-                            VALUES (@skillName, @skillLevel)";
+                            VALUES (@skillName, @skillLevel, @spyId)";
                     command.Parameters.AddWithValue("skillName", skills.skillName);
                     command.Parameters.AddWithValue("skillLevel", skills.skillLevel);
+                    command.Parameters.AddWithValue("spyId", skills.spyId);
 
                     skills.id = (int)command.ExecuteScalar();
                 }

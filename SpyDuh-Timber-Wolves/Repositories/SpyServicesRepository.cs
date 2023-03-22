@@ -107,11 +107,12 @@ namespace SpyDuh_Timber_Wolves.Repositories
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = @"
-                            INSERT INTO SpyServices (serviceName, price)
+                            INSERT INTO SpyServices (serviceName, price, spyId)
                             OUTPUT INSERTED.ID
-                            VALUES (@serviceName, @price)";
+                            VALUES (@serviceName, @price, @spyId)";
                     command.Parameters.AddWithValue("serviceName", services.serviceName);
                     command.Parameters.AddWithValue("price", services.price);
+                    command.Parameters.AddWithValue("spyId", services.spyId);
 
                     services.id = (int)command.ExecuteScalar();
                 }
