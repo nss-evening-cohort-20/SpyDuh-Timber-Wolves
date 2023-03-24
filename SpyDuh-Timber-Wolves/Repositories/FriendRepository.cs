@@ -6,7 +6,7 @@ using SpyDuh_Timber_Wolves.Models;
 
 namespace SpyDuh_Timber_Wolves.Repositories
 {
-    public class FriendRepository : BaseRepository
+    public class FriendRepository : BaseRepository, IFriendRepository
     {
         public FriendRepository(IConfiguration configuration) : base(configuration) { }
         public List<Friend> GetAll()
