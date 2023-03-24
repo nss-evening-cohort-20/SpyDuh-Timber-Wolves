@@ -6,7 +6,7 @@ using SpyDuh_Timber_Wolves.Models;
 
 namespace SpyDuh_Timber_Wolves.Repositories
 {
-    public class EnemyRepository : BaseRepository
+    public class EnemyRepository : BaseRepository, IEnemyRepository
     {
         public EnemyRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -76,7 +76,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
 
         public void Add(Enemy enemy)
         {
-            using (var connection = Connection) 
+            using (var connection = Connection)
             {
                 connection.Open();
                 using (var command = connection.CreateCommand())
