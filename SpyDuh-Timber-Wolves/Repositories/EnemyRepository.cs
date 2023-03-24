@@ -29,7 +29,19 @@ namespace SpyDuh_Timber_Wolves.Repositories
                         var enemy = new Enemy()
                         {
                             spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
-                            enemyId = reader.GetInt32(reader.GetOrdinal("EnemyId"))
+                            Spy = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                                name = reader.GetString(reader.GetOrdinal("SpyName")),
+                                bio = reader.GetString(reader.GetOrdinal("SpyBio")),
+                            },
+                            enemyId = reader.GetInt32(reader.GetOrdinal("EnemyId")),
+                            enemy = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("EnemyId")),
+                                name = reader.GetString(reader.GetOrdinal("EnemyName")),
+                                bio = reader.GetString(reader.GetOrdinal("EnemyBio")),
+                            }
                         };
 
                         enemies.Add(enemy);
@@ -63,7 +75,23 @@ namespace SpyDuh_Timber_Wolves.Repositories
                         var enemy = new Enemy()
                         {
                             spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
-                            enemyId = reader.GetInt32(reader.GetOrdinal("EnemyId"))
+                            Spy = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                                name = reader.GetString(reader.GetOrdinal("SpyName")),
+                                bio = reader.GetString(reader.GetOrdinal("SpyBio")),
+                                spySkills = new List<SpySkills>(),
+                                spyServices = new List<SpyServices>(),
+                            },
+                            enemyId = reader.GetInt32(reader.GetOrdinal("EnemyId")),
+                            enemy = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("EnemyId")),
+                                name = reader.GetString(reader.GetOrdinal("EnemyName")),
+                                bio = reader.GetString(reader.GetOrdinal("EnemyBio")),
+                                spySkills = new List<SpySkills>(),
+                                spyServices = new List<SpyServices>(),
+                            }
                         };
                         enemies.Add(enemy);
                     }

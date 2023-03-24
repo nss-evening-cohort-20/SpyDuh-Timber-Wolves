@@ -12,6 +12,8 @@ namespace SpyDuh_Timber_Wolves
             builder.Services.AddTransient<ISpyRepository, SpyRepository>();
             builder.Services.AddTransient<ISpyServicesRepository, SpyServicesRepository>();
             builder.Services.AddTransient<ISpySkillsRepository, SpySkillsRepository>();
+            builder.Services.AddTransient<IEnemyRepository, EnemyRepository>();
+            builder.Services.AddTransient<IFriendRepository, FriendRepository>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

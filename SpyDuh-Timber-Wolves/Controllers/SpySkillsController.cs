@@ -33,6 +33,17 @@ namespace SpyDuh_Timber_Wolves.Controllers
             return Ok(spy);
         }
 
+        [HttpGet("skill/{skillName}")]
+        public IActionResult GetServiceByName(string skillName)
+        {
+            var skill = _spySkillsRepository.GetBySkillName(skillName);
+            if (skill == null)
+            {
+                return NotFound();
+            }
+            return Ok(skill);
+        }
+
         [HttpGet("{skillId}")]
         public IActionResult GetSkill(int skillId)
         {

@@ -99,6 +99,37 @@ namespace SpyDuh_Timber_Wolves.Repositories
             }
         }
 
+        public List<SpyServices> GetByServiceName(string serviceName)
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"SELECT spy.id as SpyId, spy.[name], spy.bio, spyServices.id as Id, spyServices.serviceName, spyServices.price FROM spy JOIN spyServices on spy.id = spyServices.spyId WHERE spyServices.serviceName = @serviceName";
+                    command.Parameters.AddWithValue("@serviceName", serviceName);
+                    var services = new List<SpyServices>();
+                    var reader = command.ExecuteReader();
+
+                    
+                    while (reader.Read())
+                    {
+                        var service = new SpyServices()
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            serviceName = reader.GetString(reader.GetOrdinal("serviceName")),
+                            price = reader.GetInt32(reader.GetOrdinal("price")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("spyId")),
+                        };
+                        services.Add(service);
+                    }
+                    reader.Close();
+
+                    return services;
+                }
+            }
+        }
+
         public void Add(SpyServices services)
         {
             using (var connection = Connection)

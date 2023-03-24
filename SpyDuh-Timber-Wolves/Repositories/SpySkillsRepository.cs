@@ -99,6 +99,37 @@ namespace SpyDuh_Timber_Wolves.Repositories
             }
         }
 
+        public List<SpySkills> GetBySkillName(string skillName)
+        {
+            using (var connection = Connection)
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"SELECT spy.id as SpyId, spy.[name], spy.bio, spySkills.id as Id, spySkills.skillName, spySkills.skillLevel FROM spy JOIN spySkills on spy.id = spySkills.spyId WHERE spySkills.skillName = @skillName";
+                    command.Parameters.AddWithValue("@skillName", skillName);
+                    var skills = new List<SpySkills>();
+                    var reader = command.ExecuteReader();
+
+
+                    while (reader.Read())
+                    {
+                        var skill = new SpySkills()
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            skillName = reader.GetString(reader.GetOrdinal("skillName")),
+                            skillLevel = reader.GetInt32(reader.GetOrdinal("skillLevel")),
+                            spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                        };
+                        skills.Add(skill);
+                    }
+                    reader.Close();
+
+                    return skills;
+                }
+            }
+        }
+
         public void Add(SpySkills skills)
         {
             using (var connection = Connection)

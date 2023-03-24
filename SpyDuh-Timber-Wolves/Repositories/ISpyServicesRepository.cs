@@ -8,6 +8,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
         void Delete(int id);
         List<SpyServices> GetAll();
         SpyServices GetByServiceId(int id);
+        List<SpyServices> GetByServiceName(string serviceName);
         List<SpyServices> GetBySpyId(int id);
         void Update(SpyServices services);
     }

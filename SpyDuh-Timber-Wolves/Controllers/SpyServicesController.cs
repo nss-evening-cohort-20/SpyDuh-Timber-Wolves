@@ -44,6 +44,17 @@ namespace SpyDuh_Timber_Wolves.Controllers
             }
             return Ok(service);
         }
+        [HttpGet("service/{serviceName}")]
+        public IActionResult GetServiceByName(string serviceName)
+        {
+            var service = _spyServicesRepository.GetByServiceName(serviceName);
+            if (service == null)
+            {
+                return NotFound();
+            }
+            return Ok(service);
+        }
+
 
         [HttpPost]
         public IActionResult Post(SpyServices spyServices)

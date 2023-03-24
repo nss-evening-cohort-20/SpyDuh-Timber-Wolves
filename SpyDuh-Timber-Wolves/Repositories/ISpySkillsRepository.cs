@@ -8,6 +8,7 @@ namespace SpyDuh_Timber_Wolves.Repositories
         void Delete(int id);
         List<SpySkills> GetAll();
         SpySkills GetBySkillId(int id);
+        List<SpySkills> GetBySkillName(string skillName);
         List<SpySkills> GetBySpyId(int id);
         void Update(SpySkills skills);
     }

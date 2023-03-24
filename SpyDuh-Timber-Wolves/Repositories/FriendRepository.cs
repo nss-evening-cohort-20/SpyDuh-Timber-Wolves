@@ -26,7 +26,19 @@ namespace SpyDuh_Timber_Wolves.Repositories
                         var friend = new Friend()
                         {
                             spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
-                            friendId = reader.GetInt32(reader.GetOrdinal("FriendId"))
+                            Spy = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                                name = reader.GetString(reader.GetOrdinal("SpyName")),
+                                bio = reader.GetString(reader.GetOrdinal("SpyBio")),
+                            },
+                            friendId = reader.GetInt32(reader.GetOrdinal("FriendId")),
+                            friend = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("FriendId")),
+                                name = reader.GetString(reader.GetOrdinal("FriendName")),
+                                bio = reader.GetString(reader.GetOrdinal("FriendBio")),
+                            }
                         };
 
                         friends.Add(friend);
@@ -57,7 +69,19 @@ namespace SpyDuh_Timber_Wolves.Repositories
                         var friend = new Friend()
                         {
                             spyId = reader.GetInt32(reader.GetOrdinal("SpyId")),
-                            friendId = reader.GetInt32(reader.GetOrdinal("FriendId"))
+                            Spy = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("SpyId")),
+                                name = reader.GetString(reader.GetOrdinal("SpyName")),
+                                bio = reader.GetString(reader.GetOrdinal("SpyBio")),
+                            },
+                            friendId = reader.GetInt32(reader.GetOrdinal("FriendId")),
+                            friend = new Spy()
+                            {
+                                id = reader.GetInt32(reader.GetOrdinal("FriendId")),
+                                name = reader.GetString(reader.GetOrdinal("FriendName")),
+                                bio = reader.GetString(reader.GetOrdinal("FriendBio")),
+                            }
                         };
                         friends.Add(friend);
                     }
